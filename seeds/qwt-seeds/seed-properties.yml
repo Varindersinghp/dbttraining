@@ -7,3 +7,6 @@ seeds:
   - name: categories
     config:
       schema: seeddata
+  - name: shippers
+    config:
+      schema: seeddata
