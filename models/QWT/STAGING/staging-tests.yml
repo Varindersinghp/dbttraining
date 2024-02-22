@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: stg_customers
+    columns:
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_products
+    columns:
+      - name: productid
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_shipments
+    columns:
+      - name: status
+        tests:
+          - accepted_values:
+              values: ['returned', 'shipped', 'ordered']
+
+  - name: stg_orders
+    columns:
+      - name: CUSTOMERID
+        tests:
+          - relationships:
+              to: ref('stg_customers')
+              field: CUSTOMERID
+      - name: orderid
+        tests:
+          - is_even
+      - name: CUSTOMERID
+        tests:
+          - is_postive
+

@@ -48,7 +48,7 @@ models:
   +pre-hook:
      - "insert into qwt.audit.dbt_model_execution_logs (modelname,starttime,endtime,duration) values('{{this}}',current_timestamp(),null,null);"
   +post-hook:
-    - "update qwt.audit.dbt_model_execution_logs set endtime=current_timestamp(),duration=datediff('second',starttime,current_timestamp()) where modelname='{{this}}';"
+     - "update qwt.audit.dbt_model_execution_logs set endtime=current_timestamp(),duration=datediff('second',starttime,current_timestamp()) where modelname='{{this}}';"
 
 on-run-start: "Grant usage on schema qwt.audit to role public;"
 on-run-end: "grant select on table QWT.audit.dbt_model_execution_logs to role public;"
