@@ -37,7 +37,7 @@ clean-targets:         # directories to be removed by `dbt clean`
 
 vars:
   city: 'Nice'
-
+  dbt_dq_tool_schema: AUDIT
 
 models:
   QWT:
@@ -51,5 +51,6 @@ models:
      - "update qwt.audit.dbt_model_execution_logs set endtime=current_timestamp(),duration=datediff('second',starttime,current_timestamp()) where modelname='{{this}}';"
 
 on-run-start: "Grant usage on schema qwt.audit to role public;"
-on-run-end: "grant select on table QWT.audit.dbt_model_execution_logs to role public;"
+on-run-end:
+  - '{{ dq_tools.store_test_results(results) }}'
   
