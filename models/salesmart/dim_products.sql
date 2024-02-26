@@ -1,4 +1,4 @@
-{{config(materialized='view' , schema='salesmart' )}}
+{{config(materialized='view' , schema=env_var('DBT_SALESMARTDB','SALESMART') )}}
 
 select 
 d.PRODUCTID,d.PRODUCTNAME,d.QUANTITYPERUNIT,d.UNITCOST,d.UNITPRICE,d.UNITSINSTOCK,d.UNITSONORDER,

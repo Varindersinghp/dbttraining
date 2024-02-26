@@ -1,4 +1,4 @@
-{{config(materialized='view' , schema='salesmart' )}}
+{{config(materialized='view' , schema=env_var('DBT_SALESMARTDB','SALESMART') )}}
 
 select 
 --c.ORDERID,c.LINENO,c.SHIPPERID,c.PRODUCTID,c.EMPLOYEEID,c.SHIPMENTDATE,c.STATUS,
