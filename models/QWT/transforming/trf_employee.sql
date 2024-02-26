@@ -1,4 +1,4 @@
-{{config(materialized='table' , schema='transforming' )}}
+{{config(materialized='table' , schema=env_var('DBT_TRANSFORMDB','TRANSFORMING') )}}
 
 
 select a.EMPID,a.FIRSTNAME,a.LASTNAME,a.TITLE,a.HIREDATE,
