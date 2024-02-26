@@ -1,7 +1,7 @@
 {{config(materialized='incremental', unique_key=['OrderID','LINENO'] )}}
 
 select distinct a.* from {{ ref("stg_orders")}} b 
-inner join qwt.raw.orderdetails a on a.orderid=b.orderid
+inner join {{env_var('DBT_SOURCEDB','QWT')}}.{{env_var('DBT_SOURCESCHEMA','RAW')}}.orderdetails a on a.orderid=b.orderid
 
    {% if is_incremental() %}
 

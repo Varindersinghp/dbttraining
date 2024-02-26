@@ -1,4 +1,4 @@
 {{config(materialized='table') }}
 
 select *
-from QWT.RAW.suppliers_xml
+from {{env_var('DBT_SOURCEDB','QWT')}}.{{env_var('DBT_SOURCESCHEMA','RAW')}}.suppliers_xml

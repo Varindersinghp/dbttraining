@@ -5,4 +5,4 @@ select ORDERID, LINENO, SHIPPERID, CUSTOMERID PRODUCTID, EMPLOYEEID,
 cast(split_part(SHIPMENTDATE,' ',1) as DATE) as SHIPMENTDATE,
 --LEFT(trim(SHIPMENTDATE),9) as SHIPMENTDATE,
 STATUS
-from QWT.RAW.shipments
+from {{env_var('DBT_SOURCEDB','QWT')}}.{{env_var('DBT_SOURCESCHEMA','RAW')}}.shipments

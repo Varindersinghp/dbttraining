@@ -1,3 +1,3 @@
 {{config(materialized='table') }}
 
-select * from QWT.RAW.office
+select * from {{env_var('DBT_SOURCEDB','QWT')}}.{{env_var('DBT_SOURCESCHEMA','RAW')}}.office
