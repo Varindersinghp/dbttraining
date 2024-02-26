@@ -1,0 +1,46 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description : "{{ doc('customers') }}"
+    columns:
+      - name: customer_id
+        description : "{{ doc('customer_id') }}" 
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_products
+    description : Data about Products 
+    columns:
+      - name: productid
+        description : uniqueID represents each product 
+        tests:
+          - unique
+          - dq_tools.unique_where_db
+
+  - name: stg_shipments
+    description : Data about Shipments 
+    columns:
+      - name: status
+        description : Status about Shipments
+        tests:
+          - accepted_values:
+              values: ['returned', 'shipped', 'ordered']
+
+  - name: stg_orders
+    description : This table stores order details for QWT Model
+    columns:
+      - name: CUSTOMERID
+        tests:
+          - relationships:
+              to: ref('stg_customers')
+              field: CUSTOMERID
+      - name: orderid
+        description : About orderID Details
+        tests:
+          - is_even
+      - name: CUSTOMERID
+        tests:
+          - is_postive
+

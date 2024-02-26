@@ -35,8 +35,22 @@ clean-targets:         # directories to be removed by `dbt clean`
 # continue to be built as views. These settings can be overridden in the individual model files
 # using the `{{ config(...) }}` macro.
 
+vars:
+  city: 'Nice'
+  dbt_dq_tool_schema: AUDIT
+
 models:
-  my_new_project:
+  QWT:
     # Applies to all files under models/example/
     example:
       +materialized: table
+
+  +pre-hook:
+     - "insert into {{env_var('DBT_SOURCEDB','QWT')}}.{{env_var('DBT_AUDITEDB','AUDIT')}}.dbt_model_execution_logs (modelname,starttime,endtime,duration) values('{{this}}',current_timestamp(),null,null);"
+  +post-hook:
+     - "update {{env_var('DBT_SOURCEDB','QWT')}}.{{env_var('DBT_AUDITEDB','AUDIT')}}.dbt_model_execution_logs set endtime=current_timestamp(),duration=datediff('second',starttime,current_timestamp()) where modelname='{{this}}';"
+
+on-run-start: "Grant usage on schema qwt.audit to role public;"
+on-run-end:
+  - '{{ dq_tools.store_test_results(results) }}'
+  
