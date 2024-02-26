@@ -3,10 +3,11 @@ version: 2
 seeds:
   - name: divisions
     config:
-      schema: seeddata
+      schema: env_var('DBT_SEEDDATADB','SEEDDATA')
   - name: categories
     config:
-      schema: seeddata
+#      schema: seeddata
+      schema: env_var('DBT_SEEDDATADB','SEEDDATA')
   - name: shippers
     config:
-      schema: seeddata
+      schema: env_var('DBT_SEEDDATADB','SEEDDATA')
