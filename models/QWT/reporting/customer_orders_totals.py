@@ -11,7 +11,7 @@ def is_holiday(date_col):
 def model(dbt, session):
  
     dbt.config(
-        materialized = "table", schema = "reporting", packages=["holidays"]
+        materialized = "table", packages=["holidays"]
     )
  
     dim_customers_df = dbt.ref('dim_customers')

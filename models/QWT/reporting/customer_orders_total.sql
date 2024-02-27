@@ -1,4 +1,4 @@
-{{config(materialized='view' , schema='reporting' )}}
+{{config(materialized='view' ,  schema=env_var('DBT_REPORTDB','REPORTING') )}}
 
 
 select a.customerid,a.COMPANYNAME,a.CONTACTNAME,a.CITY,
