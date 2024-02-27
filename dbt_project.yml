@@ -45,6 +45,9 @@ models:
     example:
       +materialized: table
 
+snapshots:
+  +target_schema: "{{env_var('DBT_SNAPSHOTS','SNAPSHOTS')}}"
+  
   +pre-hook:
      - "insert into {{env_var('DBT_SOURCEDB','QWT')}}.{{env_var('DBT_AUDITEDB','AUDIT')}}.dbt_model_execution_logs (modelname,starttime,endtime,duration) values('{{this}}',current_timestamp(),null,null);"
   +post-hook:
