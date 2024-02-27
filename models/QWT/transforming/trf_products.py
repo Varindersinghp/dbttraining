@@ -4,7 +4,7 @@ def product_profit(x,y):
     return x-y
 
 def model(dbt, session):
-    dbt.config(materialized = "table", schema="transforming")
+    dbt.config(materialized = "table")
     #schema=env_var('DBT_TRANSFORMDB','TRANSFORMING')
     product_df = dbt.ref("stg_products")
 
