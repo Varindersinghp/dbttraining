@@ -7,7 +7,7 @@
      {%- endif -%}
  {%- endmacro %}
 
- {% macro build_snapshot_table(strategy, sql) %}
+/* {% macro build_snapshot_table(strategy, sql) %}
 
     select *,
         {{ strategy.scd_id }} as scd_id,
@@ -17,4 +17,4 @@
     from (
         {{ sql }}
     ) sbq
-{% endmacro %}
+{% endmacro %}*/
