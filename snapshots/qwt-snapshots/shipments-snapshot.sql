@@ -1,8 +1,7 @@
 {% snapshot trf_shipments_snapshot %}
 
 {{  config 
-    (target_database='qwt',
-    target_schema = 'snapshots',
+    (
     unique_key = "ORDERID||'-'||LINENO",
 
     strategy='timestamp',
